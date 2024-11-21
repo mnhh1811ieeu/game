@@ -18,54 +18,40 @@ import java.io.InputStream;
 import java.util.Random;
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
-
+import static utilz.Constains.PlayerConstants.*;
+import static utilz.Constains.Directions.*;
+import static main.Game.GAME_HEIGHT;
+import static main.Game.GAME_WIDTH;
 /**
  *
  * @author DELL 3400
  */
 public class GamePanel extends JPanel {
-
-    private float xDelta = 100, yDelta = 100;
-    //   private float xDir = 1f, yDir = 1f;
+	
     private MouseInputs mouseInputs;
-    private int frames = 0;
-    private long lastCheck = 0;
-    private BufferedImage img,subImg;
-    //   private Color color = new Color(90, 15, 5);
-//  private Random random;
-
-    public GamePanel() throws IOException {
+    private Game game;
+   
+    public GamePanel(Game game) throws IOException  {
         // random = new Random();
         mouseInputs = new MouseInputs(this);
+   this.game=game;
         setPanelSize();
-        importImg();
+       
         addKeyListener(new KeyboardInputs(this));
         addMouseListener(mouseInputs);
         addMouseMotionListener(mouseInputs);
     }
-
-    public void changeXDelta(int value) {
-        this.xDelta += value;
-
-    }
-
-    public void changeYDelta(int value) {
-        this.yDelta += value;
-
-    }
-
-    public void setRectPos(int x, int y) {
-        this.xDelta = x;
-        this.yDelta = y;
-
-    }
-
+public Game getGame() {
+	return game;
+}
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
-        subImg=img.getSubimage(1*64, 8*40, 64, 40);
-       g.drawImage(subImg,(int) xDelta,(int) yDelta, 64, 40, null);
+        game.render(g);
+      //  subImg=img.getSubimage(1*64, 8*40, 64, 40);
+      
+     
       //  g.drawImage(img.getSubimage(0, 0, 64, 40), 0, 0, null);
-        
+      
         /*   updateRectangle();
         g.setColor(color);
         g.fillRect((int) xDelta, (int) yDelta, 200, 50);
@@ -79,7 +65,7 @@ public class GamePanel extends JPanel {
          */
     }
 
-    /*  private void updateRectangle() {
+	/*  private void updateRectangle() {
         xDelta += xDir;
         if (xDelta > 400 || xDelta < 0) {
             xDir *= -1;
@@ -100,19 +86,17 @@ public class GamePanel extends JPanel {
         
     }
      */
+	public void updateGame() {
+		
+	}
     private void setPanelSize() {
-        Dimension size = new Dimension(1280, 800);
-        setMinimumSize(size);
+    	 Dimension size = new Dimension(GAME_WIDTH,GAME_HEIGHT);
+       // Dimension size = new Dimension(1280, 800);
+        //setMinimumSize(size);
         setPreferredSize(size);
-        setMaximumSize(size);
+        //setMaximumSize(size);
+        System.out.println("size :"+ GAME_WIDTH+ ";" + GAME_HEIGHT);
+        
     }
 
-    private void importImg() throws IOException {
-        InputStream is = getClass().getResourceAsStream("/images/player_sprites.png");
-        try{
-        img = ImageIO.read(is);
-    } catch(IOException e){
-        e.printStackTrace();
     }
-    }
-}

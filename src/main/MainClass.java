@@ -4,17 +4,19 @@
  */
 package main;
 
+import java.io.IOException;
+
 /**
  *
  * @author DELL 3400
  */
 public class MainClass {
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String[] args) {
-       new Game();
-    }
-    
+	/**
+	 * @param args the command line arguments
+	 */
+	public static void main(String[] args) throws IOException {
+		new Game();
+	}
+
 }
