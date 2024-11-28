@@ -18,7 +18,7 @@ public abstract class Entity {
 		initHitbox(x,y,width,height);
 	}
 
-	protected void initHitbox(float x, float y, float width, float height) {
+	protected void initHitbox(float x, float y, int  width, int height) {
 		// TODO Auto-generated method stub
 		hitBox = new Rectangle2D.Float(x, y,width,height);
 	}
